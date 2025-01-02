@@ -1,6 +1,6 @@
 <?php
 // Directory where uploaded files will be saved
-$uploadDir = 'shared_files/uploads/';
+$uploadDir = 'uploads/';
 
 // Ensure the upload directory exists
 if (!is_dir($uploadDir)) {
