@@ -1,0 +1,80 @@
+/* General reset and body styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light gray background */
+    color: #343a40; /* Dark gray text */
+    line-height: 1.6;
+}
+
+/* Container styling */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Header styling */
+h1 {
+    font-size: 2rem;
+    color: #007bff; /* Bootstrap primary blue */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* List styling */
+.list-group {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-group li {
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: #f1f1f1; /* Light gray background for items */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+.list-group li:hover {
+    background-color: #007bff; /* Highlight on hover */
+    color: #ffffff; /* White text */
+    transform: translateY(-2px); /* Lift effect */
+}
+
+/* Link styling */
+.list-group a {
+    text-decoration: none;
+    color: #007bff; /* Bootstrap primary blue */
+    font-weight: bold;
+}
+
+.list-group a:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: #ffffff; /* Match hover text color with background */
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .list-group li {
+        font-size: 0.9rem;
+    }
+}
+
+.mb-4{
+    width: 25rem;
+    margin: 3rem auto;
+}
