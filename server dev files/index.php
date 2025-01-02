@@ -30,7 +30,6 @@
                 echo "<li class=\"list-group-item\"><a href=\"?dir=$parentDir\">⬆️ Up to Parent Directory</a></li>";
             }
 
-
             $dir = '.';
             $d = 'uploads';
             $files = array_diff(scandir($dir), array('.','..', 'index.php')); // Exclude index.php
@@ -56,5 +55,7 @@
     </form>
 
 </body>
+
+<footer> "Yo mama" </footer>
 
 </html>
