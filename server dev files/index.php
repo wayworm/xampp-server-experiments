@@ -56,7 +56,7 @@
     </div>
 
     <!-- Upload form -->
-    <form action="format/upload.php" method="POST" enctype="multipart/form-data" class="mb-4">
+    <form action="upload.php" method="POST" enctype="multipart/form-data" class="mb-4">
         <label for="fileUpload">Upload a file:</label>
         <input type="file" name="fileUpload" id="fileUpload" class="form-control mb-2" required>
         <button type="submit" class="btn btn-primary">Upload</button>
