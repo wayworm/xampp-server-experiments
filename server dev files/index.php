@@ -12,50 +12,55 @@
         <h1 class="text-center text-primary">Shared Files</h1>
         <ul class="list-group mt-4">
             <?php
+            // Get the current directory from the query parameter or default to the root directory
+            $currentDir = isset($_GET['dir']) ? $_GET['dir'] : '';
 
-            // Get the base directory (relative to the script)
-            $baseDir = realpath(getcwd()); // Change this to a specific subdirectory if needed
-            $currentDir = isset($_GET['dir']) ? $_GET['dir'] : '.';
+            // Get the absolute path of the current directory
+            $currentDirPath = realpath($currentDir ? $currentDir : '.');
 
-            // Ensure the directory stays within the base directory
-            $currentDirPath = realpath($baseDir . DIRECTORY_SEPARATOR . $currentDir);
-
-            if (strpos($currentDirPath, $baseDir) !== 0) {
-                die("Access denied."); // Prevent navigation outside the base directory
+            // Ensure the directory stays within the base directory (current working directory)
+            if (strpos($currentDirPath, realpath(getcwd())) !== 0) {
+                die("Access denied.");
             }
 
-            // Generate the "Up" link if not at the root
-            if ($currentDir !== 'shared_files') {
+            // If not at the root directory, show the "Up to Parent Directory" link
+            if ($currentDir !== '') {
                 $parentDir = dirname($currentDir);
                 echo "<li class=\"list-group-item\"><a href=\"?dir=$parentDir\">⬆️ Up to Parent Directory</a></li>";
             }
 
-            $dir = '.';
-            $d = 'uploads';
-            $files = array_diff(scandir($dir), array('.','..', 'index.php')); // Exclude index.php
+            // Scan the current directory for files and directories
+            $files = array_diff(scandir($currentDirPath), array('.', '..')); // Exclude . and ..
 
-            // Define files to hide
-            $hidden_files = array('frog-face-11.webp','style.css','upload.php','format');
+            // Define files and folders to hide
+            $hidden_files = array('style.css', 'upload.php', 'format', 'frog-face-11.webp','index.php');
 
             foreach ($files as $file) {
-                 if (in_array($file, $hidden_files)) {
-                     continue; // Skip hidden files
-                 }
-                echo "<li><a href=\"$file\">$file</a></li>";
+                // Skip hidden files and folders
+                if (in_array($file, $hidden_files)) {
+                    continue;
                 }
+
+                // Build the relative path for the file
+                $relativePath = ($currentDir !== '' ? $currentDir . '/' : '') . $file;
+
+                // Check if it's a directory or file
+                if (is_dir($currentDirPath . DIRECTORY_SEPARATOR . $file)) {
+                    echo "<li class=\"list-group-item\"><a href=\"?dir=$relativePath\">📁 $file</a></li>";
+                } else {
+                    echo "<li class=\"list-group-item\"><a href=\"$relativePath\">📄 $file</a></li>";
+                }
+            }
             ?>
         </ul>
     </div>
 
-    <!-- confused by github not working -->
+    <!-- Upload form -->
     <form action="format/upload.php" method="POST" enctype="multipart/form-data" class="mb-4">
-    <label for="fileUpload">Upload a file:</label>
-    <input type="file" name="fileUpload" id="fileUpload" class="form-control mb-2" required>
-    <button type="submit" class="btn btn-primary">Upload</button>
+        <label for="fileUpload">Upload a file:</label>
+        <input type="file" name="fileUpload" id="fileUpload" class="form-control mb-2" required>
+        <button type="submit" class="btn btn-primary">Upload</button>
     </form>
 
 </body>
-
-<footer> "Yo mama" </footer>
-
 </html>
